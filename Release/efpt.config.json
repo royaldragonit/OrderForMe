@@ -1,0 +1,87 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "OrderformeContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models\/Entities",
+   "ProjectRootNamespace": "OrderForMeProject",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[GroupProduct]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LinkProduct]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Logger]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Orders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Role]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Setting]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SiteBuy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SourceBuy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[StateOrder]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Users]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[vListOrder]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[Dr_DeleteLinkProductInOrder]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[dbo].[Dr_GetInfoModifyOrder]",
+         "ObjectType": 1
+      }
+   ],
+   "UiHint": "DESKTOP-AUHO095.OrderForMe",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

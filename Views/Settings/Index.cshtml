@@ -1,0 +1,60 @@
+﻿@model IEnumerable<OrderForMeProject.Models.Entities.Setting>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Tên website
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Tỷ giá USD
+            </th>
+            <th>
+                Phí dịch vụ
+            </th>
+            <th>
+                Phí ship về VN
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeeServices)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeeShippingToVn)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-info" asp-route-id="@item.SettingId">Sửa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

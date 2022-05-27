@@ -1,0 +1,251 @@
+﻿@using OrderForMeProject.Commons;
+@model IEnumerable<OrderForMeProject.Models.Entities.VListOrder>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section StyleSheets{
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/tables/datatable/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+    <!-- END: Vendor CSS-->
+
+}
+<h3 class="title-5 m-b-35">Danh sách đặt hàng</h3>
+<form method="get" style="margin-bottom:10px;">
+    <div class="table-data__tool-left">
+        <div class="row">
+            <div class="col-md-4">
+                <select class="form-control" name="filter">
+                    <option value="0">Tất cả</option>
+                    @foreach (var item in ViewBag.StateOrder)
+                    {
+                        if (Convert.ToInt32(Context.Request.Query["filter"]) == item.StateOrderId)
+                        {
+                            <option value="@item.StateOrderId" selected="selected">@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.StateOrderId">@item.Name</option>
+                        }
+                    }
+                </select>
+                <div class="dropDownSelect2"></div>
+            </div>
+            <div class="col-md-8">
+                <button class="au-btn-filter btn btn-primary">
+                    <i class="zmdi zmdi-filter-list"></i>Lọc
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<a href="/Orders/Create" class="btn btn-info" style="margin-bottom:10px;">Tạo đơn hàng mới</a>
+<!-- Basic table -->
+<section id="basic-datatable">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <table class="dt-order table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th></th>
+                            <th>Khách hàng</th>
+                            <th>Giá</th>
+                            <th>SL</th>
+                            <th>Nhóm</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng tiền</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Modal to add new record -->
+    <div class="modal modal-slide-in fade" id="modals-slide-in">
+        <div class="modal-dialog sidebar-sm">
+            <form class="add-new-record modal-content pt-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                <div class="modal-header mb-1">
+                    <h5 class="modal-title" id="exampleModalLabel">New Record</h5>
+                </div>
+                <div class="modal-body flex-grow-1">
+                    <div class="form-group">
+                        <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                        <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="basic-icon-default-post">Post</label>
+                        <input type="text" id="basic-icon-default-post" class="form-control dt-post" placeholder="Web Developer" aria-label="Web Developer" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="basic-icon-default-email">Email</label>
+                        <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+                        <small class="form-text text-muted"> You can use letters, numbers & periods </small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="basic-icon-default-date">Joining Date</label>
+                        <input type="text" class="form-control dt-date" id="basic-icon-default-date" placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" />
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="form-label" for="basic-icon-default-salary">Salary</label>
+                        <input type="text" id="basic-icon-default-salary" class="form-control dt-salary" placeholder="$12000" aria-label="$12000" />
+                    </div>
+                    <button type="button" class="btn btn-primary data-submit mr-1">Submit</button>
+                    <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!--/ Basic table -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="/admin/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/jszip.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="/Admin/app-assets/js/scripts/tables/table-datatables-basic.js"></script>
+    <script>
+        $.validator.addMethod("__dummy__", function (value, element) {
+            return true;
+        });
+        $(document).ready(function () {
+            //Init data
+            var dataOrder =@Json.Serialize(Model);
+            console.log(dataOrder)
+            var dtProxy = $(".dt-order");
+            if (dtProxy.length) {
+                dtProxy.dataTable({
+                    data: dataOrder,
+                    columns: [
+                        { data: 'ordersId' },
+                        { data: 'ordersId' }, // used for sorting so will hide this column
+                        { data: 'fullname' },
+                        { data: 'price' },
+                        { data: 'quantity' },
+                        { data: 'groupProductName' },
+                        { data: 'createOn' },
+                        { data: 'stateName' },
+                        { data: 'totalMoney' }
+                    ],
+                    columnDefs: [
+                        {
+                            // For Checkboxes
+                            targets: 1,
+                            orderable: false,
+                            responsivePriority: 3,
+                            render: function (data, type, full, meta) {
+                                return (
+                                    '<div class="custom-control custom-checkbox"> <input class="custom-control-input dt-checkboxes" type="checkbox" value="" id="checkbox' +
+                                    full["ordersId"] +
+                                    '" /><label class="custom-control-label" for="checkbox' +
+                                    full["ordersId"] +
+                                    '"></label></div>'
+                                );
+                            },
+                            checkboxes: {
+                                selectAllRender:
+                                    '<div class="custom-control custom-checkbox"> <input class="custom-control-input" type="checkbox" value="" id="checkboxSelectAll" /><label class="custom-control-label" for="checkboxSelectAll"></label></div>'
+                            }
+                        },
+                        {
+                            targets: 2,
+                            visible: true
+                        },
+                        {
+                            targets: 3,
+                            visible: true
+                        },
+                        {
+                            targets: 4,
+                            visible: true
+                        },
+                        {
+                            // Label
+                            targets: -2,
+                            render: function (data, type, full, meta) {
+                                var $status_number = full['status'];
+                                var $status = {
+                                    'connected': { title: 'Connected', class: 'badge-light-success' }
+                                };
+                                if (typeof $status[$status_number] === 'undefined') {
+                                    return data;
+                                }
+                                return (
+                                    '<span class="badge badge-pill ' +
+                                    $status[$status_number].class +
+                                    '">' +
+                                    $status[$status_number].title +
+                                    '</span>'
+                                );
+                            }
+                        },
+                        {
+                            // Label
+                            targets: -3,
+                            visible: true
+                        },
+                        {
+                            // Label
+                            targets: -2,
+                            visible: true
+                        },
+                        {
+                            // Actions
+                            targets: -1,
+                            title: 'Hành động',
+                            orderable: false,
+                            render: function (data, type, full, meta) {
+                                return (
+                                    '<div class="d-inline-flex">' +
+                                    '<a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown">' +
+                                    feather.icons['more-vertical'].toSvg({ class: 'font-small-4' }) +
+                                    '</a>' +
+                                    '<div class="dropdown-menu dropdown-menu-right">' +
+                                    '<a href="/Orders/Split/' + full["ordersId"]+'" class="dropdown-item">' +
+                                    feather.icons['archive'].toSvg({ class: 'font-small-4 mr-50' }) +
+                                    'Tách đơn hàng</a>' +
+                                    '<a href="javascript:;" class="dropdown-item delete-record">' +
+                                    feather.icons['trash-2'].toSvg({ class: 'font-small-4 mr-50' }) +
+                                    'Xoá đơn hàng</a>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<a href="/Orders/Edit/' + full["ordersId"] +'" title="Sửa đơn hàng" class="item-edit">' +
+                                    feather.icons['edit'].toSvg({ class: 'font-small-4' }) +
+                                    '</a>'
+                                );
+                            }
+                        }
+                    ],
+                });
+                $('div.head-label').html('<h6 class="mb-0">DataTable with Buttons</h6>');
+            }
+
+        });
+    </script>
+    <!-- END: Page JS-->
+}
+

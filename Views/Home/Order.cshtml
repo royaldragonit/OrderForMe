@@ -1,0 +1,496 @@
+﻿<style>
+    .form-custom {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        font-weight: bold;
+    }
+</style>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>Thông tin mua hộ</strong>
+            </div>
+            <div class="card-body card-block">
+                <div class="form-group">
+                    <label for="linkProduct" class=" form-control-label">Link sản phẩm</label>
+                    <input type="text" id="linkProduct" placeholder="Nhập link sản phẩm để mua hàng" class="form-control">
+                </div>
+                <div class="row form-group">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="source" class=" form-control-label">Tuyến mua hộ</label>
+                            <select name="source" id="source" class="form-control">
+                                <option value="0">Chọn tuyến</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="site" class=" form-control-label">Site mua hộ</label>
+                            <select name="site" id="site" class="form-control">
+                                <option value="0">Chọn site</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="poached" class=" form-control-label">Kho hàng</label>
+                            <select name="poached" id="poached" class="form-control">
+                                <option value="0">Chọn kho hàng</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="customer" class=" form-control-label">Khách hàng</label>
+                            <select name="customer" id="customer" class="form-control">
+                                <option value="0">Chọn khách hàng</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="datebuy" class=" form-control-label">Hạn mua</label>
+                            <input type="date" id="datebuy" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="city" class=" form-control-label">Giá bán</label>
+                            <input type="text" id="city" placeholder="Nhập giá bán" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="quantity" class=" form-control-label">Số lượng</label>
+                            <input type="text" id="quantity" placeholder="Nhập số lượng" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="size" class=" form-control-label">Tổng TL (kg)</label>
+                            <input type="text" id="size" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="currency" class=" form-control-label">Tiền tệ</label>
+                            <select name="currency" id="currency" class="form-control">
+                                <option value="USD">USD</option>
+                                <option value="VND">VND</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="groupProduct" class=" form-control-label">Nhóm hàng</label>
+                            <select name="groupProduct" id="groupProduct" class="form-control">
+                                <option value="0">Chọn nhóm hàng</option>
+                                <option value="USD">USD</option>
+                                <option value="VND">VND</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="sizeTemp" class=" form-control-label">TL (tạm tính - kg)</label>
+                            <input type="text" id="sizeTemp" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="otherFee" class=" form-control-label">Phí khác (nếu có)</label>
+                            <input type="text" id="otherFee" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="note" class=" form-control-label">Nội dung ghi chú</label>
+                    <input type="text" id="note" placeholder="Nhập nội dung ghi chú" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <strong>Hoá đơn</strong>
+            </div>
+            <div class="card-body card-block">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="rate" class=" form-control-label">Tỉ giá</label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label class=" form-custom">1 USD = </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <input type="text" id="rate" placeholder="24000" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="rate" class=" form-control-label">phí vc nội địa Mỹ, Nhật (USD)</label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <input type="text" id="rate" placeholder="24000" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="rate" class=" form-control-label">Thuế nội địa Mỹ, Nhật (USD)</label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <input type="text" id="rate" placeholder="24000" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="rate" class=" form-custom">Tổng tiền hàng</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="rate" class=" form-custom">2.000.000 đ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="rate" class=" form-control-label">Phí về Việt Nam (đ)</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="rate" class=" form-custom">2.000.000 đ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="rate" class=" form-control-label">Phí dịch vụ 3%(đ)</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="rate" class=" form-custom">2.000.000 đ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="rate" class="form-control-label">Phụ phí (đ)</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="rate" class=" form-custom">2.000.000 đ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="rate" class="form-control-label">Phí DV cộng thêm (đ)</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="rate" class=" form-custom">2.000.000 đ</label>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="rate" class="form-custom">Tổng tiền tạm tính</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="rate" class=" form-custom">2.000.000 đ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="rate" class="form-control-label">Hình thức thanh toán</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <select name="groupProduct" id="groupProduct" class="form-control">
+                                <option value="cash">Tiền mặt</option>
+                                <option value="bank">Chuyển khoản</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+        <h3 class="title-5 m-b-35">Danh sách đặt hàng</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+                <div class="rs-select2--light rs-select2--md">
+                    <select class="js-select2" name="property">
+                        <option selected="selected">All Properties</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <div class="rs-select2--light rs-select2--sm">
+                    <select class="js-select2" name="time">
+                        <option selected="selected">Today</option>
+                        <option value="">3 Days</option>
+                        <option value="">1 Week</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <button class="au-btn-filter">
+                    <i class="zmdi zmdi-filter-list"></i>filters
+                </button>
+            </div>
+            <div class="table-data__tool-right">
+                <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    <i class="zmdi zmdi-plus"></i>Thêm đơn
+                </button>
+                <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                    <select class="js-select2" name="type">
+                        <option selected="selected">Export</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                    <tr>
+                        <th>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>description</th>
+                        <th>date</th>
+                        <th>status</th>
+                        <th>price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr-shadow">
+                        <td>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </td>
+                        <td>Lori Lynch</td>
+                        <td>
+                            <span class="block-email">lori@example.com</span>
+                        </td>
+                        <td class="desc">Samsung S8 Black</td>
+                        <td>2018-09-27 02:12</td>
+                        <td>
+                            <span class="status--process">Processed</span>
+                        </td>
+                        <td>$679.00</td>
+                        <td>
+                            <div class="table-data-feature">
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                    <i class="zmdi zmdi-more"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="spacer"></tr>
+                    <tr class="tr-shadow">
+                        <td>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </td>
+                        <td>Lori Lynch</td>
+                        <td>
+                            <span class="block-email">john@example.com</span>
+                        </td>
+                        <td class="desc">iPhone X 64Gb Grey</td>
+                        <td>2018-09-29 05:57</td>
+                        <td>
+                            <span class="status--process">Processed</span>
+                        </td>
+                        <td>$999.00</td>
+                        <td>
+                            <div class="table-data-feature">
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                    <i class="zmdi zmdi-more"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="spacer"></tr>
+                    <tr class="tr-shadow">
+                        <td>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </td>
+                        <td>Lori Lynch</td>
+                        <td>
+                            <span class="block-email">lyn@example.com</span>
+                        </td>
+                        <td class="desc">iPhone X 256Gb Black</td>
+                        <td>2018-09-25 19:03</td>
+                        <td>
+                            <span class="status--denied">Denied</span>
+                        </td>
+                        <td>$1199.00</td>
+                        <td>
+                            <div class="table-data-feature">
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                    <i class="zmdi zmdi-more"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="spacer"></tr>
+                    <tr class="tr-shadow">
+                        <td>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </td>
+                        <td>Lori Lynch</td>
+                        <td>
+                            <span class="block-email">doe@example.com</span>
+                        </td>
+                        <td class="desc">Camera C430W 4k</td>
+                        <td>2018-09-24 19:10</td>
+                        <td>
+                            <span class="status--process">Processed</span>
+                        </td>
+                        <td>$699.00</td>
+                        <td>
+                            <div class="table-data-feature">
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                    <i class="zmdi zmdi-more"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- END DATA TABLE -->
+    </div>
+</div>

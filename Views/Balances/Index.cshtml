@@ -1,0 +1,117 @@
+﻿@model IEnumerable<OrderForMeProject.Models.Entities.Logger>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .custom {
+        display: inline;
+        padding: 0.2em 0.6em 0.3em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25em;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+
+    .custom-info {
+        background-color: #5bc0de;
+    }
+
+    .custom-success {
+        background-color: #5cb85c;
+    }
+
+    .custom-danger {
+        background-color: #d9534f;
+    }
+</style>
+<h1>Danh sách nạp/rút</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Tạo mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Khách hàng
+            </th>
+            <th>
+                Số tiền
+            </th>
+            <th>
+                Loại
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+
+                @if (item.Type == "1")
+                {
+                    <td>
+                        <span class="custom custom-info">Nạp</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <label style="background-color: #5bc0de;">Rút</label>
+                    </td>
+                }
+                @if (item.IsAccept.Value)
+                {
+                    <td>
+                        <span class="custom custom-success">Chấp nhận</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <label class="custom custom-danger">Từ chối</label>
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateOn)
+                </td>
+                <td>
+                    @if (!item.IsAccept.Value)
+                    {
+                        <form method="get" action="/Balances/Accept">
+                            <input name="loggerId" value="@item.LoggerId" type="hidden" />
+                            <button type="submit" class="btn btn-success">Đồng ý</button>
+                        </form>
+                        <form method="get" action="/Balances/Reject">
+                            <input name="loggerId" value="@item.LoggerId" type="hidden" />
+                            <button type="submit" class="btn btn-danger">Từ chối</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-success" disabled="disabled">Đã chấp thuận</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

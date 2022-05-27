@@ -1,0 +1,220 @@
+﻿@model List<Logger>
+
+@{
+    ViewData["Title"] = "Lịch sử nạp, rút tiền";
+}
+
+@section StyleSheets{
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="/Admin/app-assets/vendors/css/forms/select/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/Admin/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="/Admin/app-assets/css/plugins/forms/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="/Admin/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
+    <!-- END: Page CSS-->
+    <style>
+        .custom-success {
+            background-color: #5cb85c;
+        }
+
+        .custom {
+            display: inline;
+            padding: 0.2em 0.6em 0.3em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25em;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+        .custom-danger {
+            background-color: #d9534f;
+        }
+    </style>
+}
+
+<!-- Bootstrap Validation -->
+<div class="col-md-12 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Biểu mẫu tạo người dùng mới</h4>
+        </div>
+        <div class="card-body">
+            <form class="needs-validation" method="get" novalidate asp-action="CreateTransaction">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="balance">Nạp số dư</label>
+                            <input type="text" value="0" name="balance" id="balance" class="form-control" placeholder="0" required />
+                            <div class="valid-feedback">Hợp lệ!</div>
+                            <div class="invalid-feedback">Vui lòng nhập số dư (ít nhất là 0).</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Yêu cầu nạp tiền</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /Bootstrap Validation -->
+<!-- Basic table -->
+<section id="basic-datatable">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <table class="dt-groupProduct table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Số dư</th>
+                            <th>Ngày tạo</th>
+                            <th>Loại</th>
+                            <th>Trạng thái</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Modal to add new record -->
+    <div class="modal modal-slide-in fade" id="modals-slide-in">
+        <div class="modal-dialog sidebar-sm">
+            <form class="add-new-record modal-content pt-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                <div class="modal-header mb-1">
+                    <h5 class="modal-title" id="exampleModalLabel">New Record</h5>
+                </div>
+                <div class="modal-body flex-grow-1">
+                    <div class="form-group">
+                        <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                        <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="basic-icon-default-post">Post</label>
+                        <input type="text" id="basic-icon-default-post" class="form-control dt-post" placeholder="Web Developer" aria-label="Web Developer" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="basic-icon-default-email">Email</label>
+                        <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+                        <small class="form-text text-muted"> You can use letters, numbers & periods </small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="basic-icon-default-date">Joining Date</label>
+                        <input type="text" class="form-control dt-date" id="basic-icon-default-date" placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" />
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="form-label" for="basic-icon-default-salary">Salary</label>
+                        <input type="text" id="basic-icon-default-salary" class="form-control dt-salary" placeholder="$12000" aria-label="$12000" />
+                    </div>
+                    <button type="button" class="btn btn-primary data-submit mr-1">Submit</button>
+                    <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!--/ Basic table -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="/admin/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/jszip.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="/Admin/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script src="/Admin/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="/Admin/app-assets/js/scripts/forms/form-validation.js"></script>
+    <script>
+        $.validator.addMethod("__dummy__", function (value, element) {
+            return true;
+        });
+    </script>
+    <script>
+
+        $(document).ready(function () {
+            //Init data
+            var dataOrder =@Json.Serialize(Model);
+            console.log(dataOrder)
+            var dtProxy = $(".dt-groupProduct");
+            if (dtProxy.length) {
+                dtProxy.dataTable({
+                    data: dataOrder,
+                    columns: [
+                        { data: 'loggerId' },
+                        { data: 'balance' },
+                        { data: 'createOn' },
+                        { data: 'type' },
+                        { data: 'isAccept' },
+                    ],
+                    columnDefs: [
+                        {
+                            targets: 1,
+                            visible: true
+                        },
+                        {
+                            targets: 2,
+                            visible: true,
+                            render: function (data, type, full, meta) {
+                                debugger;
+                                return (
+                                    formatDate(full['createOn'])
+                                );
+                            }
+                        },
+                        {
+                            targets: 3,
+                            visible: true,
+                            render: function (data, type, full, meta) {
+                                let str = "Nạp";
+                                if (full['type'] !== "1") {
+                                    str = "Rút";
+                                }
+                                return (
+                                    str
+                                );
+                            }
+                        },
+                        {
+                            targets: 4,
+                            visible: true,
+                            render: function (data, type, full, meta) {
+                                if (full['isAccept']) {
+                                    return(  "<span class='custom custom-success'>Đã chấp thuận</span>")
+                                }
+                                return (
+                                     "<span class='custom custom-danger'>Đang chờ duyệt</span>"
+                                )
+                            }
+                        }
+                    ],
+                });
+                $('div.head-label').html('<h6 class="mb-0">DataTable with Buttons</h6>');
+            }
+
+        });
+    </script>
+    <!-- END: Page JS-->
+}

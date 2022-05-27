@@ -1,0 +1,128 @@
+﻿@model OrderForMeProject.Models.Entities.Users
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@section StyleSheets{
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="/Admin/app-assets/vendors/css/forms/select/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/Admin/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="/Admin/app-assets/css/plugins/forms/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="/Admin/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
+    <!-- END: Page CSS-->
+}
+<!-- Bootstrap Validation -->
+<div class="col-md-12 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Biểu mẫu thay đổi thông tin người dùng</h4>
+        </div>
+        <div class="card-body">
+            <form class="needs-validation" novalidate asp-action="Edit">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="basic-addon-name">Tên tài khoản</label>
+                            <input asp-for="Username" disabled type="text" id="basic-addon-name" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon-name" required />
+                            <input asp-for="UsersId" type="hidden" />
+                            <div class="valid-feedback">Hợp lệ!</div>
+                            <div class="invalid-feedback">Vui lòng nhập tên tài khoản.</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="basic-default-email1">Email</label>
+                            <input type="email" asp-for="Email" id="basic-default-email1" class="form-control" placeholder="john.doe@email.com" aria-label="john.doe@email.com" required />
+                            <div class="valid-feedback">Hợp lệ!</div>
+                            <div class="invalid-feedback">Vui lòng nhập email</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select-country1">Vai trò</label>
+                            <select class="form-control" name="roleId" id="select-country1" disabled required>
+                                @foreach (var item in ViewBag.Role)
+                                {
+                                    <option value="@item.RoleId">@item.Name</option>
+                                }
+                            </select>
+                            <div class="valid-feedback">Hợp lệ!</div>
+                            <div class="invalid-feedback">Vui lòng chọn vai trò</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="basic-default-email1">Số dư hiện tại</label>
+                            <input type="text" asp-for="Balance" class="form-control"disabled aria-label="john.doe@email.com" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="fullname">Họ tên</label>
+                            <input type="text" asp-for="Fullname" id="fullname" class="form-control" placeholder="" required />
+                            <div class="valid-feedback">Hợp lệ!</div>
+                            <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Số điện thoại</label>
+                            <input type="tel" asp-for="Phone" id="phone" class="form-control" placeholder="" required />
+                            <div class="valid-feedback">Hợp lệ!</div>
+                            <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="address">Địa chỉ</label>
+                            <input type="text" asp-for="Address" id="address" class="form-control" placeholder="Vui lòng nhập địa chỉ" required />
+                            <div class="valid-feedback">Hợp lệ!</div>
+                            <div class="invalid-feedback">Vui lòng nhập địa chỉ.</div>
+                        </div>
+                        <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Cập nhật người dùng</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /Bootstrap Validation -->
+<hr />
+<div>
+    <a asp-action="Index" class="btn btn-primary">Quay lại danh sách</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="/Admin/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script src="/Admin/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="/Admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="/Admin/app-assets/js/scripts/forms/form-validation.js"></script>
+    <script>
+        $.validator.addMethod("__dummy__", function (value, element) {
+            return true;
+        });
+    </script>
+    <script>
+        function fChargeMoney() {
+            if (!isNaN($("#txtMoney").val())) {
+                $.ajax({
+                    url: "/Balances/ChargeMoney?money=" + $("#txtMoney").val(),
+                    type: "GET",
+                    timeout: 0,
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        alert(res.message);
+                    },
+                    error: function (err) {
+                        console.log("Lỗi", err);
+                        alert("Có lỗi trong quá trình nạp tiền, vui lòng thử lại sau");
+                    }
+                });
+            }
+            else {
+                alert("Vui lòng nhập số tiền muốn nạp");
+            }
+        }
+        $(document).ready(function () {
+
+        });
+    </script>
+    <!-- END: Page JS-->
+}

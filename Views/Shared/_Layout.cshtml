@@ -1,0 +1,112 @@
+﻿@inject IViewLocalizer localizer
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<head>
+    @await Html.PartialAsync("~/Views/Shared/_Head.cshtml")
+    @await RenderSectionAsync("StyleSheets", required: false)
+
+    <script>
+        function toVnd(x) {
+            return x.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+        }
+        function toNumber(x) {
+            let str = "";
+            for (let i = 0; i < x.length; i++) {
+                if (!isNaN(x[i]))
+                    str += x[i];
+            }
+            if (str == "")
+                return 0;
+            return parseInt(str);
+        }
+        function padTo2Digits(num) {
+            return num.toString().padStart(2, '0');
+        }
+        function formatDate(date) {
+            date = new Date(date);
+            return [
+                padTo2Digits(date.getDate()),
+                padTo2Digits(date.getMonth() + 1),
+                date.getFullYear(),
+            ].join('/');
+        }
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+    </script>
+</head>
+<!-- END: Head-->
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
+    @await Html.PartialAsync("~/Views/Shared/_Header.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/_MainMenu.cshtml")
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2021<a class="ml-25" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a><span class="d-none d-sm-inline-block">, All rights Reserved</span></span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i data-feather="heart"></i></span></p>
+    </footer>
+    <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
+    <!-- END: Footer-->
+    <!-- BEGIN: Vendor JS-->
+    <script src="/admin/app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="/admin/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="/admin/app-assets/js/core/app-menu.js"></script>
+    <script src="/admin/app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+
+    <script>
+        $(window).on('load', function () {
+            if (feather) {
+                feather.replace({
+                    width: 14,
+                    height: 14
+                });
+            }
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+<!-- END: Body-->
+
+</html>

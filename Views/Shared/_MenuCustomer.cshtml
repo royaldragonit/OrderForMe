@@ -1,0 +1,10 @@
+﻿@model int
+<li class=" nav-item">
+    <a class="d-flex align-items-center" href="@Url.Content("/Users/Edit/"+Model)"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="User">Tài khoản của tôi</span></a>
+</li>
+<li class=" nav-item">
+    <a class="d-flex align-items-center" href="/Orders"><i data-feather='shopping-cart'></i><span class="menu-title text-truncate" data-i18n="Invoice">Quản lý đơn hàng</span></a>
+</li>
+<li class=" nav-item">
+    <a class="d-flex align-items-center" href="@Url.Content("/Users/TransactionHistory/"+Model)"><i data-feather="dollar-sign"></i><span class="menu-title text-truncate" data-i18n="Invoice">Lịch sử nạp tiền</span></a>
+</li>
